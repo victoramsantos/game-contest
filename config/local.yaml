@@ -1,0 +1,7 @@
+app:
+  server:
+    port: 8080
+aws_config:
+    region: us-east-1
+    profile: localstack
+    endpoint: http://localhost:4566    
