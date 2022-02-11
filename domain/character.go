@@ -52,6 +52,22 @@ type Class struct {
 	Velocity   []AttributeImprovment `json:"velocity_improvement"`
 }
 
+func (this Class) GetVelocity() int {
+	velocity := 0
+	for _, attr := range this.Velocity {
+		velocity += attr.GetImprovement()
+	}
+	return velocity
+}
+
+func (this Class) GetAttack() int {
+	attack := 0
+	for _, attr := range this.Attack {
+		attack += attr.GetImprovement()
+	}
+	return attack
+}
+
 type Attributes struct {
 	Life         Attribute `json:"life"`
 	Strength     Attribute `json:"strength"`
@@ -61,7 +77,7 @@ type Attributes struct {
 
 type Attribute struct {
 	Name  string `json:"name"`
-	Value uint8  `json:"value"`
+	Value int    `json:"value"`
 }
 
 type AttributeImprovment struct {
@@ -69,15 +85,6 @@ type AttributeImprovment struct {
 	Improvement     uint16     `json:"improvement"`
 }
 
-type CharacterUsecase interface {
-	NewCharacter(name string, className string) (*Character, error)
-	GetCharacterDetails(name string) (*usecasesdomain.CharacterDetails, error)
-	ListCharacters() ([]usecasesdomain.CharacterStatus, error)
-}
-
-type CharacterRepository interface {
-	GetClassByName(className string) (*Class, error)
-	GetCharacterByName(name string) (*Character, error)
-	CreateCharacter(character Character) error
-	ListCharacters() ([]Character, error)
+func (this AttributeImprovment) GetImprovement() int {
+	return int(this.Improvement) * int(this.TargetAttribute.Value) / 100
 }

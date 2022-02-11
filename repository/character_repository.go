@@ -2,7 +2,6 @@ package repository
 
 import (
 	"errors"
-	"fmt"
 	"strings"
 
 	"github.com/victoramsantos/game-contest/domain"
@@ -32,8 +31,8 @@ func (this *characterRepository) GetCharacterByName(name string) (*domain.Charac
 }
 
 func (this *characterRepository) CreateCharacter(character domain.Character) error {
-	for _, character := range this.characters {
-		if strings.EqualFold(character.Name, character.Name) {
+	for _, char := range this.characters {
+		if strings.EqualFold(character.Name, char.Name) {
 			return errors.New("character already exists")
 		}
 	}
@@ -192,8 +191,6 @@ func NewCharacterRepository() domain.CharacterRepository {
 		Attack:     attacks,
 		Velocity:   velocity,
 	})
-
-	fmt.Println(classes)
 
 	return &characterRepository{
 		classes:    classes,
