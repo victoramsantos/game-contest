@@ -7,8 +7,9 @@ import (
 )
 
 type Character struct {
-	Name  string `json:"name" vd:"len($)>1 && len($) <= 15 && regexp('([A-Za-z_])+')"`
-	Class *Class `json:"class"`
+	Name    string `json:"name" vd:"len($)>0 && len($) <= 15 && regexp('^([A-Za-z_])+$')"`
+	Class   *Class `json:"class"`
+	IsAlive bool   `json:"is_alive"`
 }
 
 func (this Character) ToDetails() *usecasesdomain.CharacterDetails {
@@ -40,7 +41,7 @@ func (this Character) ToStatus() *usecasesdomain.CharacterStatus {
 	return &usecasesdomain.CharacterStatus{
 		Name:    this.Name,
 		Class:   this.Class.Name,
-		IsAlive: true,
+		IsAlive: this.IsAlive,
 	}
 }
 

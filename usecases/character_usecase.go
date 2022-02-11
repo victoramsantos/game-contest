@@ -26,8 +26,9 @@ func (this *characterUsecase) NewCharacter(name string, className string) (*doma
 	}
 
 	character := domain.Character{
-		Name:  name,
-		Class: class,
+		Name:    name,
+		Class:   class,
+		IsAlive: true,
 	}
 
 	err = validator.Validate(character)
