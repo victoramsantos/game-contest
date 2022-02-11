@@ -7,7 +7,7 @@ import (
 )
 
 type Character struct {
-	Name    string `json:"name" vd:"len($)>1 && len($) <= 15 && regexp('([A-Za-z_])+')"`
+	Name    string `json:"name" vd:"len($)>1 && len($) <= 15 && regexp('^([A-Za-z_])+$')"`
 	Class   *Class `json:"class"`
 	IsAlive bool   `json:"is_alive"`
 }
