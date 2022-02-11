@@ -17,7 +17,14 @@ func main() {
 	e := echo.New()
 
 	initPrometheus(e)
-	initCharacterService(e)
+
+	characterRepository := repository.NewCharacterRepository()
+	characterUsecase := usecases.NewCharacterUsecase(characterRepository)
+	controller.InitCharacterController(e, characterUsecase)
+
+	loggerRepository := repository.NewLogger()
+	gameUsecase := usecases.NewGameUsecase(characterRepository, loggerRepository)
+	controller.InitGameController(e, gameUsecase)
 
 	log.Fatal(e.Start(":" + viper.GetString("app.server.port")))
 }
@@ -25,12 +32,6 @@ func main() {
 func initPrometheus(e *echo.Echo) {
 	p := prometheus.NewPrometheus("echo", nil)
 	p.Use(e)
-}
-
-func initCharacterService(e *echo.Echo) {
-	repository := repository.NewCharacterRepository()
-	usecase := usecases.NewCharacterUsecase(repository)
-	controller.InitCharacterController(e, usecase)
 }
 
 func init() {
