@@ -32,6 +32,11 @@ func (this *characterRepository) GetCharacterByName(name string) (*domain.Charac
 }
 
 func (this *characterRepository) CreateCharacter(character domain.Character) error {
+	for _, character := range this.characters {
+		if strings.EqualFold(character.Name, character.Name) {
+			return errors.New("character already exists")
+		}
+	}
 	this.characters = append(this.characters, character)
 	return nil
 }

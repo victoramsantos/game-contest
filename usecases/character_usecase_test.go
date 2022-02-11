@@ -48,6 +48,20 @@ func TestNewCharacter(t *testing.T) {
 		mockRepository.AssertExpectations(t)
 	})
 
+	// TODO
+	// t.Run("character already exists", func(t *testing.T) {
+	// 	mockRepository.On("CreateCharacter", mock.AnythingOfType("domain.Character")).Return(expectedCharacter1).Once()
+	// 	mockRepository.On("GetClassByName", mock.AnythingOfType("string")).Return(expectedClass1, nil).Once()
+
+	// 	usecase.NewCharacter("john", "Warrior")
+	// 	character, err := usecase.NewCharacter("john", "Warrior")
+
+	// 	assert.Error(t, err)
+	// 	assert.Nil(t, character)
+
+	// 	mockRepository.AssertExpectations(t)
+	// })
+
 	t.Run("invalid name", func(t *testing.T) {
 		mockRepository.On("CreateCharacter", mock.AnythingOfType("domain.Character")).Return(expectedCharacter1)
 		mockRepository.On("GetClassByName", mock.AnythingOfType("string")).Return(expectedClass1, nil)
@@ -72,10 +86,6 @@ func TestNewCharacter(t *testing.T) {
 		assert.Error(t, err)
 		assert.Nil(t, character)
 
-		character, err = usecase.NewCharacter("_", "Warrior")
-		assert.Error(t, err)
-		assert.Nil(t, character)
-
 		mockRepository.AssertExpectations(t)
 	})
 
@@ -92,6 +102,14 @@ func TestNewCharacter(t *testing.T) {
 		assert.NotNil(t, character)
 
 		character, err = usecase.NewCharacter("jo_hn", "Warrior")
+		assert.NoError(t, err)
+		assert.NotNil(t, character)
+
+		character, err = usecase.NewCharacter("a", "Warrior")
+		assert.NoError(t, err)
+		assert.NotNil(t, character)
+
+		character, err = usecase.NewCharacter("_", "Warrior")
 		assert.NoError(t, err)
 		assert.NotNil(t, character)
 
