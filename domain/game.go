@@ -45,16 +45,16 @@ func NewGame(charA *Character, charB *Character) *Game {
 
 func (this *Game) Attack() {
 	this.Opponent.Character.Class.Attributes.Life.Value -= this.Attacker.Attack
-	if this.Opponent.Character.Class.Attributes.Life.Value < 0 {
+	if this.Opponent.Character.Class.Attributes.Life.Value <= 0 {
 		this.Opponent.Character.Class.Attributes.Life.Value = 0
-		this.Opponent.Character.IsAlive = false //TODO
+		this.Opponent.Character.IsAlive = false
 	}
-
-	this.Attacker.UpdateAttack()
-	this.Opponent.UpdateAttack()
 }
 
 func (this *Game) SwitchPositions() {
+	this.Attacker.UpdateAttack()
+	this.Opponent.UpdateAttack()
+
 	temp := this.Attacker
 	this.Attacker = this.Opponent
 	this.Opponent = temp

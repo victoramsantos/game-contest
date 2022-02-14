@@ -44,6 +44,16 @@ func (this *characterRepository) ListCharacters() ([]domain.Character, error) {
 	return this.characters, nil
 }
 
+func (this *characterRepository) UpdateCharacter(character *domain.Character) error {
+	for i, char := range this.characters {
+		if strings.EqualFold(character.Name, char.Name) {
+			this.characters[i] = *character
+			return nil
+		}
+	}
+	return errors.New("character doesn't exists")
+}
+
 func NewCharacterRepository() domain.CharacterRepository {
 	classes := make([]domain.Class, 0)
 	//Warrior
