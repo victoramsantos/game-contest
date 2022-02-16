@@ -51,7 +51,8 @@ func TestNewCharacter(t *testing.T) {
 	// TODO
 	// t.Run("character already exists", func(t *testing.T) {
 	// 	mockRepository.On("CreateCharacter", mock.AnythingOfType("domain.Character")).Return(expectedCharacter1).Once()
-	// 	mockRepository.On("GetClassByName", mock.AnythingOfType("string")).Return(expectedClass1, nil).Once()
+	// 	mockRepository.On("CreateCharacter", mock.AnythingOfType("domain.Character")).Return(errors.New("character already exists")).Once()
+	// 	mockRepository.On("GetClassByName", mock.AnythingOfType("string")).Return(expectedClass1, nil).Twice()
 
 	// 	usecase.NewCharacter("john", "Warrior")
 	// 	character, err := usecase.NewCharacter("john", "Warrior")

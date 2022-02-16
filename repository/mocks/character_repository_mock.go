@@ -39,3 +39,8 @@ func (_mock *CharacterRepository) ListCharacters() ([]domain.Character, error) {
 	ret := _mock.Called()
 	return ret.Get(0).([]domain.Character), nil
 }
+
+func (_mock *CharacterRepository) UpdateCharacter(character *domain.Character) error {
+	_mock.Called(character)
+	return nil
+}
