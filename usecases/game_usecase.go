@@ -3,6 +3,7 @@ package usecases
 import (
 	"errors"
 	"log"
+	"strings"
 
 	"github.com/victoramsantos/game-contest/domain"
 )
@@ -49,6 +50,10 @@ func (this *gameUsecase) updateStats(game *domain.Game) {
 }
 
 func (this *gameUsecase) setupGame(nameA string, nameB string) (*domain.Game, error) {
+	if strings.EqualFold(nameA, nameB) {
+		log.Println("Fight must be between different characters")
+		return nil, errors.New("fight must be between different characters")
+	}
 	charA, err := this.repository.GetCharacterByName(nameA)
 	if err != nil {
 		log.Println("No character found for", charA)

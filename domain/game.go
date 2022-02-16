@@ -5,12 +5,6 @@ import (
 	"time"
 )
 
-type GameLog interface {
-	Start(*Game) string
-	Attack(*Game) string
-	Finish(*Game) string
-}
-
 type Game struct {
 	Attacker *Player
 	Opponent *Player
