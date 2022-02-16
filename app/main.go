@@ -26,6 +26,8 @@ func main() {
 	gameUsecase := usecases.NewGameUsecase(characterRepository, loggerRepository)
 	controller.InitGameController(e, gameUsecase)
 
+	controller.InitAppController(e)
+
 	log.Fatal(e.Start(":" + viper.GetString("app.server.port")))
 }
 
