@@ -9,13 +9,41 @@
 			"name": "character",
 			"item": [
 				{
-					"name": "/character",
+					"name": "/character - John",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"character_name\": \"Johnny\",\n    \"class_name\": \"Warrior\"\n}",
+							"raw": "{\n    \"character_name\": \"John\",\n    \"class_name\": \"Warrior\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/character",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"character"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/character - Mary",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"character_name\": \"Mary\",\n    \"class_name\": \"Mage\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,6 +98,40 @@
 							"port": "8080",
 							"path": [
 								"character"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "game",
+			"item": [
+				{
+					"name": "/game/start",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"character_a\": \"John\",\n    \"character_b\": \"Mary\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/game/start",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"game",
+								"start"
 							]
 						}
 					},
