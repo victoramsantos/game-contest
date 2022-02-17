@@ -22,6 +22,7 @@ func InitGameController(e *echo.Echo, usecase domain.GameUsecase) {
 }
 
 func (this *gameController) Start(ctx echo.Context) error {
+	controllerdomain.Simulation("game")
 	var request controllerdomain.GameRequest
 	err := ctx.Bind(&request)
 
