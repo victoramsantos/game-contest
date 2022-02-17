@@ -4,25 +4,23 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
-	"net/http/httputil"
 	"time"
 )
 
 func main() {
 	url := "http://localhost:8080"
-	client := http.Client{
-		Timeout: time.Second * 2,
-	}
+	client := http.Client{}
 
 	if !isAppRunning(client, url) {
 		log.Fatal("application is not running")
 	}
 
-	characters := createRandomCharacters(client, url, 100)
-	startFights(client, url, characters, 30)
+	characters := createRandomCharacters(client, url, 200)
+	startFights(client, url, characters, 50)
 
 }
 
@@ -111,16 +109,33 @@ func fight(client http.Client, url string, attacker string, opponent string) {
 		log.Fatal(err)
 	}
 
-	resp, _ := client.Do(req)
-	defer resp.Body.Close()
+	fmt.Printf("/game/start %v\n", content)
+	res, getErr := client.Do(req)
 
-	logger, err := httputil.DumpResponse(resp, true)
-	if err != nil {
-		log.Fatalln(err)
+	if getErr != nil {
+		log.Fatal(getErr)
 	}
-	fmt.Printf("/game/start %v", content)
 
-	fmt.Println(string(logger))
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
+
+	if res.StatusCode != 200 {
+		return
+	}
+
+	body, readErr := ioutil.ReadAll(res.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
+
+	var logger []string
+	jsonErr := json.Unmarshal(body, &logger)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	fmt.Println(logger)
 }
 
 func randomizer() *rand.Rand {

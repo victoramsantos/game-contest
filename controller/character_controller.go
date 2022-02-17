@@ -24,6 +24,7 @@ func InitCharacterController(e *echo.Echo, usecase domain.CharacterUsecase) {
 }
 
 func (this *characterController) CreateCharacter(ctx echo.Context) error {
+	controllerdomain.Simulation("character")
 	var request controllerdomain.CharacterRequest
 	err := ctx.Bind(&request)
 	//TODO: Validate input
@@ -43,6 +44,7 @@ func (this *characterController) CreateCharacter(ctx echo.Context) error {
 }
 
 func (this *characterController) GetCharacterDetails(ctx echo.Context) error {
+	controllerdomain.Simulation("character")
 	character, err := this.usecase.GetCharacterDetails(ctx.Param("name"))
 	if err != nil {
 		log.Println(err.Error())
@@ -53,6 +55,7 @@ func (this *characterController) GetCharacterDetails(ctx echo.Context) error {
 }
 
 func (this *characterController) ListCharacters(ctx echo.Context) error {
+	controllerdomain.Simulation("character")
 	characters, err := this.usecase.ListCharacters()
 	if err != nil {
 		log.Println(err.Error())

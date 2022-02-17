@@ -1,7 +1,8 @@
 app:
   server:
     port: 8080
-aws_config:
-    region: us-east-1
-    profile: localstack
-    endpoint: http://localhost:4566    
+  simulation: 
+    enabled: true 
+    apis_sleep:
+      character: 500
+      game: 5000

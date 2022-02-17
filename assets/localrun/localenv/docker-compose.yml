@@ -1,0 +1,12 @@
+version: "3.7"
+
+services:
+  game:
+    container_name: game
+    build: ../../../
+    environment: 
+    - ENVIRONMENT=local
+    network_mode: host
+    
+    
+
