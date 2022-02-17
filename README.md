@@ -210,7 +210,7 @@ bash down.sh
 
 Nas [configurações da aplicação](config/local.yaml) é possível ajustar qual a porta a aplicação será exposta e as configurações de simulação. Estas configurações adicionam alguns `sleeps` nas chamadas aos controllers da aplicação. Isso é interessante para simular um cenário produtivo da aplicação e visualizar como o dashboard da aplicação se comporta.
 
-O dashboard da aplicação pode ser encontrado (após executar o `setup.sh`) em [http://localhost:3000/d/yt-D57f7k/general-dashboard](http://localhost:3000/d/yt-D57f7k/general-dashboard?orgId=1&from=now-5m&to=now&refresh=5s). Também está disponível a interface web do prometheus em [http://localhost:9090/graph](http://localhost:9090/graph) para consumir as métricas da aplicação que estão expostas em (http://localhost:8080/metrics)[http://localhost:8080/metrics].
+O dashboard da aplicação pode ser encontrado (após executar o `setup.sh`) em [http://localhost:3000/d/yt-D57f7k/general-dashboard](http://localhost:3000/d/yt-D57f7k/general-dashboard?orgId=1&from=now-5m&to=now&refresh=5s). Também está disponível a interface web do prometheus em [http://localhost:9090/graph](http://localhost:9090/graph) para consumir as métricas da aplicação que estão expostas em [http://localhost:8080/metrics](http://localhost:8080/metrics).
 
 ## Requisitos
   - go 1.17.6 
